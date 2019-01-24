@@ -164,3 +164,8 @@ group :production do
   gem 'therubyracer', '~> 0.12.1'
   gem 'newrelic_rpm', '~> 3.5.5.38'
 end
+
+local_gemfile = File.join(File.dirname(__FILE__), "Gemfile.local")
+if File.exists?(local_gemfile)
+  eval_gemfile local_gemfile
+end
