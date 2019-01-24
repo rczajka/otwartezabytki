@@ -15,7 +15,7 @@ window.default_options =
 window.load_google_maps = ->
   script = document.createElement("script")
   script.type = "text/javascript"
-  script.src = "http://maps.googleapis.com/maps/api/js?key=#{window.google_maps_key}&sensor=false&callback=google_maps_loaded"
+  script.src = "https://maps.googleapis.com/maps/api/js?key=#{window.google_maps_key}&sensor=false&callback=google_maps_loaded"
   document.body.appendChild(script)
 
 window.google_maps_loaded = ->

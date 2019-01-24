@@ -154,7 +154,7 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
       chunks
 
     renderDirections = (callback) ->
-      latLngBounds = new google.maps.LatLngBounds()
+      latLngBounds = null
 
       for data, index in directionsData
         directionsRenderer = new google.maps.DirectionsRenderer
@@ -165,10 +165,19 @@ angular.module('Relics').controller 'WalkingGuideCtrl',
         directionsRenderers.push(directionsRenderer)
 
         for route in data.routes
-          latLngBounds.union(route.bounds)
+          console.log(route.bounds)
+          if latLngBounds is null
+            latLngBounds = route.bounds
+          else
+            latLngBounds.union(route.bounds)
+          console.log(latLngBounds)
 
         if directionsData.length == index + 1
-          $scope.map.instance.fitBounds(latLngBounds, true)
+          console.log("fitBounds")
+          console.log(latLngBounds)
+          do (latLngBounds) ->
+            google.maps.event.addListenerOnce directionsRenderer, 'directions_changed', () ->
+              $scope.map.instance.fitBounds(latLngBounds, true)
           callback()
 
     findRoute = (index = 0) ->

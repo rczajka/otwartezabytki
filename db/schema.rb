@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170313102810) do
+ActiveRecord::Schema.define(:version => 20170321073716) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(:version => 20170313102810) do
     t.string   "ancestry"
   end
 
-  add_index "categories", ["ancestry"], :name => "categories_ancestry_trgm_idx"
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
 
   create_table "communes", :force => true do |t|
@@ -153,7 +152,6 @@ ActiveRecord::Schema.define(:version => 20170313102810) do
   end
 
   add_index "original_relics", ["ancestry"], :name => "index_original_relics_on_ancestry"
-  add_index "original_relics", ["ancestry"], :name => "original_relics_ancestry_trgm_idx"
   add_index "original_relics", ["commune_id"], :name => "index_original_relics_on_commune_id"
   add_index "original_relics", ["district_id"], :name => "index_original_relics_on_district_id"
   add_index "original_relics", ["place_id"], :name => "index_original_relics_on_place_id"
@@ -192,16 +190,17 @@ ActiveRecord::Schema.define(:version => 20170313102810) do
     t.string   "name"
     t.string   "author"
     t.string   "file"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
     t.boolean  "main"
     t.string   "date_taken"
     t.integer  "file_full_width"
     t.integer  "file_full_height"
     t.text     "description"
     t.string   "alternate_text"
-    t.string   "state",            :default => "initialized"
+    t.string   "state",                       :default => "initialized"
     t.integer  "position"
+    t.integer  "position_in_group_of_relics"
   end
 
   create_table "places", :force => true do |t|
@@ -227,19 +226,19 @@ ActiveRecord::Schema.define(:version => 20170313102810) do
     t.string   "nid_id"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.string   "ancestry"
     t.integer  "commune_id"
     t.integer  "district_id"
     t.integer  "voivodeship_id"
-    t.string   "kind",            :default => "SA"
-    t.boolean  "approved",        :default => false
+    t.string   "kind",                  :default => "SA"
+    t.boolean  "approved",              :default => false
     t.string   "categories"
-    t.text     "description",     :default => ""
+    t.text     "description",           :default => ""
     t.string   "tags"
-    t.string   "type",            :default => "Relic"
-    t.string   "country_code",    :default => "PL"
+    t.string   "type",                  :default => "Relic"
+    t.string   "country_code",          :default => "PL"
     t.string   "fprovince"
     t.string   "fplace"
     t.text     "documents_info"
@@ -250,15 +249,14 @@ ActiveRecord::Schema.define(:version => 20170313102810) do
     t.text     "reason"
     t.integer  "date_start"
     t.integer  "date_end"
-    t.string   "state",           :default => "unchecked"
-    t.string   "existence",       :default => "existed"
-    t.string   "common_name",     :default => ""
+    t.string   "state",                 :default => "unchecked"
+    t.string   "existence",             :default => "existed"
+    t.string   "common_name",           :default => ""
     t.string   "auto_categories"
     t.text     "wlk_guide_description"
   end
 
   add_index "relics", ["ancestry"], :name => "index_relics_on_ancestry"
-  add_index "relics", ["ancestry"], :name => "relics_ancestry_trgm_idx"
   add_index "relics", ["commune_id"], :name => "index_relics_on_commune_id"
   add_index "relics", ["district_id"], :name => "index_relics_on_district_id"
   add_index "relics", ["existence"], :name => "index_relics_on_existence"

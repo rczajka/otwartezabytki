@@ -20,7 +20,7 @@
     = stylesheet_link_tag "application", :media => "all"
     /[if lt IE 9]
       = stylesheet_link_tag "ie8", :media => "all"
-    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,600,300&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}
   %body{ :class => [cookies["font-size"].to_s, controller_name, action_name, ("resource_#{params[:id]}" if params[:id])].join(' '), :data => { :logged => warden.authenticated?.to_s } }
     .oz-change-contrast
       %button.btn.btn-default.js-contr-normal.oz-change-contrast-btn.oz-normal{:alt => t('oz_img_alts.normal_layout')} A
@@ -86,8 +86,9 @@
                         = render 'shared/browse_sm'
                     %li
                       = link_to t('layouts.application.addrelic'), new_relicbuilder_path, :class => "oz-add-relic #{'active' if current_page?(new_relicbuilder_path)}"
-                    - Page.where(name: ['about']).each do |page|
-                      = render 'pages/navigation', page: page
+                    - cache [I18n.locale, "application-nav-pages-about", request.path_info] do
+                      - Page.where(name: ['about']).each do |page|
+                        = render 'pages/navigation', page: page
                     %li
                       = link_to t('layouts.application.widgets'), widgets_path, :class => "oz-widgets #{'active' if current_page?(widgets_path)}"
                     - Page.where(name: ['download', 'contact']).each do |page|

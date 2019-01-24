@@ -74,7 +74,8 @@
     %h2.oz-no-margin= t('views.pages.home.stats_info.header1')
     .left.col-md-6.col-xs-12
       %h3= t('views.pages.home.stats_info.header2')
-      = render 'polish_map'
+      - cache [I18n.locale, "polish-map"] do
+        = render 'polish_map'
     .right.col-md-6.col-xs-12.oz-no-padding
       - cache [I18n.locale, "recently-modified"] do
         %h3= t('views.pages.home.recently_modified')

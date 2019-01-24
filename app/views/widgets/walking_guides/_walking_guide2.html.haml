@@ -73,7 +73,7 @@
       = t('widget.walking_guide.print')
 
 
-  .col-md-9.col-xs-12.oz-map-container.oz-no-padding.js-map-container
+  .col-md-9.col-xs-12.oz-map-container.oz-no-padding.js-map-container{:style=>"overflow:hidden;"}
     %div(google-map="true" center="map.center" zoom="map.zoom" events="map.events" draggable="true")
       %div(marker="true" ng-repeat="relic in widget.relics" coords="relic" icon="getIcon($first, $last)" click="loadRelicInfo(relic)")
         %div(window="true" show="relic.showInfoWindow || false" closeClick="relic.showInfoWindow = false")
