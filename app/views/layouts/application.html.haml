@@ -86,8 +86,9 @@
                         = render 'shared/browse_sm'
                     %li
                       = link_to t('layouts.application.addrelic'), new_relicbuilder_path, :class => "oz-add-relic #{'active' if current_page?(new_relicbuilder_path)}"
-                    - Page.where(name: ['about']).each do |page|
-                      = render 'pages/navigation', page: page
+                    - cache [I18n.locale, "application-nav-pages-about", request.path_info] do
+                      - Page.where(name: ['about']).each do |page|
+                        = render 'pages/navigation', page: page
                     %li
                       = link_to t('layouts.application.widgets'), widgets_path, :class => "oz-widgets #{'active' if current_page?(widgets_path)}"
                     - Page.where(name: ['download', 'contact']).each do |page|
