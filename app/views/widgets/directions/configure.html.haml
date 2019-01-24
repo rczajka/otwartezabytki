@@ -1,5 +1,5 @@
 - content_for :before_javascripts do
-  = javascript_include_tag "http://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
+  = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Settings.oz.gm_key}&sensor=false&libraries=places"
 #direction_widget.oz-iframe-dir-widget{ :"data-replace" => "#direction_widget" }
   .oz-sidebar.col-md-3.col-sm-3.col-xs-12.oz-no-padding
     = link_to image_tag("logo-widget.png"), root_path, :class => "logo hidden-xs", alt: t('oz_img_alts.open_relics_logo')
